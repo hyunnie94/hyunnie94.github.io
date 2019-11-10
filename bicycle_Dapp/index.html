@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script  src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+    <script>
+      var obj = new Array();
+      obj[0]="img/1.png";
+      obj[1]="img/2.png";
+      obj[2]="img/3.png";
+      obj[3]="img/4.png";
+    </script>
+    <script>
+      var buy = () => {
+        $(".content").load("buy.html");
+        $.ajaxPrefilter('json', function(options, orig, jqXHR) { if (options.crossDomain && !$.support.cors) return 'jsonp' });
+        $.ajax({
+          type:"GET",
+          url:"./data.json",
+          crossDomain: true,
+          dataType:"JSON",
+          success: function(data) {
+            var result = ''
+            for(var i=0; i<data.length; i++) {
+              $('#dataArea').append("brand_name: "+data[i]['brand_name']+", year: "+data[i]['year']+"<br />price: "+data[i]['price']+", number: "+data[i]['contact']);
+              $('#dataArea').append("<br /><br />")
+            }
+          },
+          error: function(request, status, error) {
+            alert('error!');
+          }
+        });
+
+      }
+      var sell = () => {
+        $(".content").load("sell.html");
+      }
+    </script>
+    <script>
+      $("#testa").hover(function() {
+        var val = $(this).html();
+        console.log(1);
+      })
+    </script>
+    <script>
+    $(document).ready(function first() {
+      $.ajaxPrefilter('json', function(options, orig, jqXHR) { if (options.crossDomain && !$.support.cors) return 'jsonp' });
+      $.ajax({
+        type:"GET",
+        url:"./data.json",
+        crossDomain: true,
+        dataType:"JSON",
+        success: function(data) {
+          //TODO
+          // alert(data);
+          // $("#dataArea").html(data[0].name);
+          // var arr = JSON.parse(data);
+          var result = ''
+          for(var i=0; i<data.length; i++) {
+            $('#dataArea').append("brand_name: "+data[i]['brand_name']+", year: "+data[i]['year']+"<br />price: "+data[i]['price']+", number: "+data[i]['contact']);
+            $('#dataArea').append("<br /><br />")
+          }
+          // result += '<table>'
+          // for(var i=0; i<arr.length;i++) {
+          //   result += '<tr>'
+          //   result += '<td>'+arr[i]['name']+'</td>'
+          //   result += '<td>'+arr[i]['age']+'</td>'
+          //   result += '<td>'+arr[i]['address']+'</td>'
+          //   result += '</tr>'
+          // }
+          // result += '</table>'
+          // $('#dataArea').append(result);
+        },
+        error: function(request, status, error) {
+          alert('error!');
+          // result += '</table>'
+          // $('#data_table').append(result);
+        }
+      });
+    });
+    </script>
+    <title></title>
+    <style type="text/css">
+      .container{
+        display:flex;
+        width:100%;
+        flex-direction:column;
+      }
+      header{
+        text-align:center;
+        font-weight:bold;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        margin-bottom: 10px;
+        word-spacing:10px;
+        letter-spacing:7px;
+        /* background-color:white; */
+        background-color:#FFFAF0;
+        position: sticky;
+        top: 0;
+      }
+      nav a {
+        display: inline-block;
+        right:0;
+        text-align: center;
+        text-decoration: none;
+        background-color: gray;
+        width:100px;
+        color:white;
+        font-size:20px;
+        border-radius: 10px;
+        margin:10px;
+      }
+      #info{
+        float: left;
+        font-size:1.1rem;
+        letter-spacing:3px;
+        line-height:40px;
+      }
+      #menu{
+        display: inline;
+        float: right;
+        text-align: right;
+        padding-right: 30px;
+      }
+      section{
+        border: 1px solid silver;
+      }
+      section>article{
+        float: left;
+        width: 80%;
+        height: 500px;
+        text-align:center;
+        border-right: 3px solid silver;
+      }
+      section>aside{
+        float: right;
+        width: 20%;
+        text-align:center;
+      }
+      footer{
+        clear: both;
+        margin-bottom: 0;
+        text-align:center;
+        line-height:3px;
+      }
+      .content{
+        display:flex;
+        flex-direction:row;
+      }
+      #company{
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      #students{
+        text-align:right;
+        margin-right:50px;
+        font: 14px/24px "Source Code Pro", Inconsolata, "Lucida Console", Terminal, "Courier New", Courier;
+      }
+      table{
+        width:50%;
+        border:2px solid green;
+        text-align: center;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      tr.title {
+        display: table;
+      }
+      th, tr, td {
+        padding:5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Bicycle Dapp</h1>
+      </header>
+      <nav>
+        <a href="#" onclick="buy()">Buy</a>
+        <a href="#" onclick="sell()">Sell</a>
+      </nav>
+      <nav id="info">
+        <ul>
+          <li>Contract Address : </li>
+          <li>Account Address : </li>
+          <li>Holding ETH Count : </li>
+        </ul>
+      </nav>
+      <section class="content">
+        <article class="data">
+          <div>
+            <a href="#" id="testa">test</a>
+          </div>
+           article
+        </article>
+        <aside class="user">
+          <!-- <img id="image_src" /> -->
+          <div id="dataArea">
+            <!-- <table id="data_table">
+              <tr class="title">
+                <td>
+                  name
+                </td>
+                <td>
+                  age
+                </td>
+                <td>
+                  adress
+                </td>
+              </tr>
+            </table> -->
+            <!-- aside -->
+          </div>
+        </aside>
+      </section>
+      <footer>
+        <p id="company">
+          (주)Ethercycle
+        </p>
+        <p id>
+          All right reserved by KWU &copy; 2019
+        </p>
+        <pre id="students">
+          2014906050 미디어커뮤니케이션학과 김주리
+          2015726100   컴퓨터소프트웨어학과 이승복
+          2014603034            수학과   이현경
+        </pre>
+      </footer>
+    </div>
+  </body>
+</html>

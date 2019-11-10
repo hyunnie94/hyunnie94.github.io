@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      form {
+        line-height:3;
+        font-size: 20px;
+      }
+      input[type=submit] {
+        margin-left: 100px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>자전거 판매 등록</h1>
+      <form action="" method="post" enctype="multipart/form-data">
+        <label for="brand_name">자전거 브랜드 : </label>
+        <select name="brand_name" id="brand_name">
+          <option>삼천리자전거</option>
+          <option>알톤스포츠</option>
+          <option>써벨로(Cervelo)</option>
+          <option>아르곤(Argon 18)</option>
+          <option>BMC</option>
+          <option>피나렐로(PINARELLO)</option>
+        </select><br />
+        <label for="year">연식 : </label>
+        <input type="text" name="year" id="year" style="width:33px" placeholder="2010"/><br />
+        <label for="price">가격 : </label>
+        <input type="text" name="price" id="price" style="width:200px" placeholder=" ,와 원은 빼고 입력해주세요"/><br />
+        <label>핸드폰번호 : </label>
+        <input type="text" name="phone1" maxlength="4" style="width:33px" placeholder="010"/> -
+        <input type="text" name="phone1" maxlength="4" style="width:40px"/> -
+        <input type="text" name="phone1" maxlength="4" style="width:40px" /><br />
+        <input type="file" name="image"/><br />
+        <input type="submit" value="판매 등록"/>
+      </form>
+    </div>
+  </body>
+</html>
