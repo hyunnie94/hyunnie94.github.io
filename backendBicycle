@@ -1,0 +1,42 @@
+
+
+// /submit 라우팅 -> 트랜잭션을 생성하고 브로드캐스팅. 트랜잭션 해시를 얻은 이후 클라이언트에게 전송
+app.get("/submit", function(req,res){
+  var fileHash = req.query.hash;
+  var owner = req.query.owner;
+  proof.set.sendTransaction(owner, fileHash, {
+  from: web3.eth.accounts[0], 
+  }, function(error, transactionHash){
+  if(!error)
+  {
+    res.send(transactionHash);
+  }
+  else
+  {
+    res.send("Error");
+  }
+  })
+})
+
+// /getInfo 라우팅 -> 트랜잭션을 생성하는 대신 노드 자체적인 컨트랙트의 get 메소드 호출
+// 어떤 응답을 받든 간에 값을 돌려줌
+app.get("/getInfo", function(req, res){
+  var fileHash = req.query.hash;
+  var details = proof.get.call(fileHash);
+  res.send(details);
+})
+
+proof.logFileAddedStatus().watch(function(error, result){
+  if(!error)
+  {
+    if(result.args.status == true)   // 상태값 검사 후 true인 경우에만 연결된 모든 클라이언트에게 이벤트를 브로드캐스팅
+    {
+    io.send(result);
+    }
+  }
+})
+
+//function submit() 구현
+//function getInfo()  구현
+
+
